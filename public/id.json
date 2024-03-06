@@ -1,0 +1,15 @@
+{
+    "@context": [
+      "https://www.w3.org/ns/solid/oidc-context.jsonld",
+      {
+        "interop": "http://www.w3.org/ns/solid/interop#"
+      }
+    ]  ,
+    "client_id": "http://localhost:3006/id.json",
+    "client_name": "LDO React Tutorial",
+    "logo_uri": "https://robohash.org/ldo-react-tutorial?set=set3",
+    "redirect_uris": ["http://localhost:3006/callback"],
+    "grant_types" : ["refresh_token","authorization_code"],
+    "interop:hasAccessNeedGroup": "http://localhost:3006/access-needs.ttl",
+    "interop:hasAuthorizationCallbackEndpoint": "http://localhost:3006"
+  }

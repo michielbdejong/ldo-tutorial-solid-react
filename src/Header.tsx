@@ -10,7 +10,7 @@ export const Header: FunctionComponent = () => {
 
   const webIdResource = useResource(session.webId);
   const profile = useSubject(SolidProfileShapeShapeType, session.webId);
-
+  let saiSession: unknown;
   const loggedInName = webIdResource?.isReading()
     ? "LOADING..."
     : profile?.fn
@@ -21,14 +21,13 @@ export const Header: FunctionComponent = () => {
     const saiAuth = async () => {
       console.log('saiAuth');
       // if (saiSession) return;
-      if (!session) return;
+      if (!session.webId) return;
       const webId = session.webId as string;
       const deps = { fetch, randomUUID: crypto.randomUUID.bind(crypto) };
-      await Application.build(webId, CLIENT_ID, deps);
+      saiSession = await Application.build(webId, CLIENT_ID, deps);
+      window.location.href = (saiSession as any).authorizationRedirectUri;
     }
-    
-    saiAuth();
-  
+      
   return (
     <header>
       {session.isLoggedIn ? (
@@ -36,6 +35,7 @@ export const Header: FunctionComponent = () => {
         <p>
           You are logged as {loggedInName}.{" "}
           <button onClick={logout}>Log Out</button>
+          <button onClick={saiAuth}>SAI Auth</button>
         </p>
       ) : (
         // If the session is not logged in
@@ -46,7 +46,7 @@ export const Header: FunctionComponent = () => {
               // Get the Solid issuer the user should log into
               const issuer = prompt(
                 "Enter your Solid Issuer",
-                "https://solidweb.me"
+                "http://localhost:3000"
               );
               if (!issuer) return;
               login(issuer);

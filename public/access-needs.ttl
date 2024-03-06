@@ -1,0 +1,33 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX interop: <http://www.w3.org/ns/solid/interop#>
+PREFIX acl: <http://www.w3.org/ns/auth/acl#>
+PREFIX shape
+
+<#this>
+  a interop:AccessNeedGroup ;
+  interop:accessNecessity interop:accessRequired ;
+  interop:accessScenario interop:PersonalAccess ;
+  interop:authenticatesAs interop:SocialAgent ;
+  interop:hasAccessDescriptionSet
+    <./descriptions-en> ,
+    <./descriptions-es> ;
+  interop:hasAccessNeed <#need-foaf-profile> .
+
+<#need-foaf-profile>
+  a interop:AccessNeed ;
+  interop:registeredShapeTree <#profileTree> ;
+  interop:accessNecessity interop:AccessRequired ;
+  interop:accessMode acl:Read, acl:Create, acl:Update, acl:Delete .
+
+<#profileTree>
+  a shapetrees:ShapeTree ;
+  shapetrees:expectsType shapetrees:Resource ;
+  shapetrees:shape <./foafProfile.txt> ;
+  shapetrees:describesInstance rdfs:label .
+
+<./descriptions-en>
+  interop:usesLanguage "en"^^xsd:language .
+
+<./descriptions-es>
+  interop:usesLanguage "es"^^xsd:language .
