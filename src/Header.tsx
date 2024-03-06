@@ -1,9 +1,12 @@
 import { FunctionComponent } from "react";
 import { useResource, useSolidAuth, useSubject } from "@ldo/solid-react";
 import { SolidProfileShapeShapeType } from "./.ldo/solidProfile.shapeTypes";
+const { Application } = require('@janeirodigital/interop-application');
+
+const CLIENT_ID = 'http://localhost:3006/id.json';
 
 export const Header: FunctionComponent = () => {
-  const { session, login, logout } = useSolidAuth();
+  const { session, login, logout, fetch } = useSolidAuth();
 
   const webIdResource = useResource(session.webId);
   const profile = useSubject(SolidProfileShapeShapeType, session.webId);
@@ -14,6 +17,18 @@ export const Header: FunctionComponent = () => {
     ? profile.fn
     : session.webId;
 
+    // let saiSession: unknown;
+    const saiAuth = async () => {
+      console.log('saiAuth');
+      // if (saiSession) return;
+      if (!session) return;
+      const webId = session.webId as string;
+      const deps = { fetch, randomUUID: crypto.randomUUID.bind(crypto) };
+      await Application.build(webId, CLIENT_ID, deps);
+    }
+    
+    saiAuth();
+  
   return (
     <header>
       {session.isLoggedIn ? (

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@janeirodigital/interop-application": "^1.0.0-rc.23",
     "@ldo/ldo": "^0.0.1-alpha.17",
     "@ldo/solid-react": "^0.0.1-alpha.17",
     "@testing-library/jest-dom": "^5.17.0",
