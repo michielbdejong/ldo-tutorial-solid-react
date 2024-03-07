@@ -3,7 +3,7 @@ import { useResource, useSolidAuth, useSubject } from "@ldo/solid-react";
 import { SolidProfileShapeShapeType } from "./.ldo/solidProfile.shapeTypes";
 const { Application } = require('@janeirodigital/interop-application');
 
-const CLIENT_ID = 'http://localhost:3006/id.json';
+const CLIENT_ID = 'http://localhost:3009/id.json';
 
 export const Header: FunctionComponent = () => {
   const { session, login, logout, fetch } = useSolidAuth();
@@ -49,7 +49,7 @@ export const Header: FunctionComponent = () => {
                 "http://localhost:3000"
               );
               if (!issuer) return;
-              login(issuer);
+              login(issuer, { clientId: CLIENT_ID });
             }}
           >
             Log In
