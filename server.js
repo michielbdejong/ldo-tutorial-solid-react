@@ -9,7 +9,7 @@ http.createServer((req, res) => {
   console.log(req.url);
   console.log(req.headers);
   if (req.url === '/id.ttl') {
-    res.writeHead(200, { 'Content-Type': 'application/ld+json' });
+    res.writeHead(200, { 'Content-Type': 'text/turtle' });
     res.write(idDoc);
   } else if (req.url === "/access-needs.ttl") {
     res.writeHead(200, { 'Content-Type': 'text/turtle' });
@@ -23,6 +23,7 @@ http.createServer((req, res) => {
   } else {
     res.writeHead(404, { 'Content-Type': 'text/html' });
     res.write('Not found: ' + req.url);
+    console.log('Not found: ' + req.url);    
   }
   res.end();
 }).listen(3009);
