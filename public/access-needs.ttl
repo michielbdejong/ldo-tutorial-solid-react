@@ -2,7 +2,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX interop: <http://www.w3.org/ns/solid/interop#>
 PREFIX acl: <http://www.w3.org/ns/auth/acl#>
-PREFIX shape
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 <#this>
   a interop:AccessNeedGroup ;
@@ -10,8 +10,7 @@ PREFIX shape
   interop:accessScenario interop:PersonalAccess ;
   interop:authenticatesAs interop:SocialAgent ;
   interop:hasAccessDescriptionSet
-    <./descriptions-en> ,
-    <./descriptions-es> ;
+    <./descriptions-en> ;
   interop:hasAccessNeed <#need-foaf-profile> .
 
 <#need-foaf-profile>
@@ -23,11 +22,8 @@ PREFIX shape
 <#profileTree>
   a shapetrees:ShapeTree ;
   shapetrees:expectsType shapetrees:Resource ;
-  shapetrees:shape <./foafProfile.txt> ;
-  shapetrees:describesInstance rdfs:label .
+  shapetrees:shape <./foafProfile.shex> ;
+  shapetrees:describesInstance foaf:name .
 
 <./descriptions-en>
   interop:usesLanguage "en"^^xsd:language .
-
-<./descriptions-es>
-  interop:usesLanguage "es"^^xsd:language .

@@ -1,0 +1,14 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX interop: <http://www.w3.org/ns/solid/interop#>
+
+
+<./descriptions-en>
+  a interop:AccessDescriptionSet ;
+  interop:usesLanguage "en"^^xsd:language .
+
+<#en-need-foaf-profile>
+  a interop:AccessNeedDescription ;
+  interop:inAccessDescriptionSet <> ;
+  interop:hasAccessNeed <./access-needs#need-foaf-profile> ;
+  skos:prefLabel "Access to FOAF parts of your WebID Doc."@en .

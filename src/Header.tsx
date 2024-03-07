@@ -3,7 +3,7 @@ import { useResource, useSolidAuth, useSubject } from "@ldo/solid-react";
 import { SolidProfileShapeShapeType } from "./.ldo/solidProfile.shapeTypes";
 const { Application } = require('@janeirodigital/interop-application');
 
-const CLIENT_ID = 'http://localhost:3009/id.json';
+const CLIENT_ID = 'http://localhost:3009/id.ttl';
 
 export const Header: FunctionComponent = () => {
   const { session, login, logout, fetch } = useSolidAuth();

@@ -1,0 +1,6 @@
+<http://localhost:3009/id.ttl> <http://www.w3.org/ns/solid/oidc#client_name> "LDO React Tutorial";
+<http://www.w3.org/ns/solid/oidc#logo_uri> <https://robohash.org/ldo-react-tutorial?set=set3>;
+<http://www.w3.org/ns/solid/oidc#redirect_uris> <http://localhost:3006/>;
+<http://www.w3.org/ns/solid/oidc#grant_types> "refresh_token", "authorization_code";
+<http://www.w3.org/ns/solid/interop#hasAccessNeedGroup> "http://localhost:3009/access-needs.ttl";
+<http://www.w3.org/ns/solid/interop#hasAuthorizationCallbackEndpoint> "http://localhost:3006".

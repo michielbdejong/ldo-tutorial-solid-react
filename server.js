@@ -1,20 +1,28 @@
 const http = require('http');
+const fs = require('fs');
+const idDoc = fs.readFileSync('./public/id.ttl', 'utf8');
+const accessNeeds = fs.readFileSync('./public/access-needs.ttl', 'utf8');
+const foafProfileShex = fs.readFileSync('./public/foafProfile.shex', 'utf8');
+const descriptionsEn = fs.readFileSync('./public/descriptions-en.ttl', 'utf8');
+
 http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'application/ld+json' });
-  res.write(JSON.stringify({
-    "@context": [
-      "https://www.w3.org/ns/solid/oidc-context.jsonld",
-      {
-        "interop": "http://www.w3.org/ns/solid/interop#"
-      }
-    ]  ,
-    "client_id": "http://localhost:3009/id.json",
-    "client_name": "LDO React Tutorial",
-    "logo_uri": "https://robohash.org/ldo-react-tutorial?set=set3",
-    "redirect_uris": ["http://localhost:3006/callback"],
-    "grant_types" : ["refresh_token","authorization_code"],
-    "interop:hasAccessNeedGroup": "http://localhost:3006/access-needs.ttl",
-    "interop:hasAuthorizationCallbackEndpoint": "http://localhost:3006"
-  }, null, 2));
+  console.log(req.url);
+  console.log(req.headers);
+  if (req.url === '/id.ttl') {
+    res.writeHead(200, { 'Content-Type': 'application/ld+json' });
+    res.write(idDoc);
+  } else if (req.url === "/access-needs.ttl") {
+    res.writeHead(200, { 'Content-Type': 'text/turtle' });
+    res.write(accessNeeds);
+  } else if (req.url === "/foafProfile.shex") {
+    res.writeHead(200, { 'Content-Type': 'text/shex' });
+    res.write(foafProfileShex);
+  } else if (req.url === "/descriptions-en.ttl") {
+    res.writeHead(200, { 'Content-Type': 'text/turtle' });
+    res.write(descriptionsEn);
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+    res.write('Not found: ' + req.url);
+  }
   res.end();
 }).listen(3009);
